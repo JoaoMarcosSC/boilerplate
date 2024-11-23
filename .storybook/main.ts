@@ -1,24 +1,17 @@
 const config = {
-  // Certifique-se de que está abrangendo todos os tipos de arquivos de histórias.
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
-
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-webpack5-compiler-swc',
-    '@chromatic-com/storybook'
-  ],
-
+  staticDirs: ['../public'],
+  stories: ['../src/components/**/stories.tsx'],
+  addons: ['@storybook/addon-essentials'],
   framework: {
-    name: '@storybook/react',
+    name: '@storybook/nextjs',
     options: {}
   },
-
-  webpackFinal: async (config) => {
-    config.resolve.modules.push(`${process.cwd()}/src`) // Permite imports absolutos.
-    return config
+  docs: {
+    autodocs: true
   },
-
-  docs: {}
+  webpackFinal: (config) => {
+    config.resolve.modules.push(`${process.cwd()}/src`)
+    return config
+  }
 }
-
 export default config
